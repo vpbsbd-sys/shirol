@@ -1,0 +1,219 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Bills 253-257</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f6f6f9;--surface:#ffffff;--ink:#1d1a24;--muted:#6b6574;--line:#e3dfe8;
+  --magenta:#c8175d;--magenta-soft:#fbe6ef;--blue:#2a3d8f;--ok:#1f7a4a;--warn:#a15c00;
+  --font:"Hind",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--display:"Rozha One",Georgia,"Times New Roman",serif;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16141a;--surface:#211e27;--ink:#eeeaf2;--muted:#a79fb2;--line:#37323f;
+  --magenta:#ff5c95;--magenta-soft:#3a1f2c;--blue:#a9b8ff;--ok:#6fd49c;--warn:#f0b35a;}}
+:root[data-theme="dark"]{--bg:#16141a;--surface:#211e27;--ink:#eeeaf2;--muted:#a79fb2;--line:#37323f;
+  --magenta:#ff5c95;--magenta-soft:#3a1f2c;--blue:#a9b8ff;--ok:#6fd49c;--warn:#f0b35a;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
+img{max-width:100%}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 60px}
+header.top{display:flex;gap:16px;align-items:stretch;justify-content:space-between;flex-wrap:wrap;border-bottom:3px solid var(--magenta);padding-bottom:14px;margin-bottom:18px}
+.brand h1{font-family:var(--display);font-weight:400;color:var(--magenta);font-size:clamp(28px,5vw,40px);line-height:1;margin:0}
+.brand p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.counter{border:2px solid var(--magenta);display:flex;align-items:center;gap:14px;padding:6px 16px;background:var(--surface)}
+.counter span{color:var(--muted);font-size:14px;line-height:1.2}
+.counter b{font-size:38px;color:var(--blue);font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+nav.tabs{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{background:none;border:0;padding:10px 14px;cursor:pointer;color:var(--muted);font-weight:500;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--magenta)}
+section.panel{background:var(--surface);border:1px solid var(--line);padding:18px;margin-bottom:16px}
+section.panel h2{font-size:19px;margin:0 0 4px;font-weight:600}
+.hint{color:var(--muted);font-size:14px;margin:0 0 12px}
+.drop{border:2px dashed var(--line);padding:26px 16px;text-align:center;cursor:pointer;display:block}
+.drop:hover,.drop.over{border-color:var(--magenta);background:var(--magenta-soft)}
+.drop strong{display:block;font-size:17px}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.summary{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;font-size:15px}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--magenta)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line)}
+table.list{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+table.list th{text-align:left;font-weight:600;font-size:13px;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);background:var(--bg)}
+table.list td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.list tr.billed td{color:var(--muted)}
+table.list tbody tr.pick{cursor:pointer}
+table.list tbody tr.pick:hover td{background:var(--magenta-soft)}
+table.list tr.on td{background:var(--bg)}
+table.list input[type=checkbox]{width:20px;height:20px;accent-color:var(--magenta);cursor:pointer;margin:0}
+table.list td.num,table.list th.num{text-align:right;font-variant-numeric:tabular-nums}
+table.list input[type=text]{width:100%;min-width:160px;border:1px solid transparent;background:transparent;padding:3px 6px}
+table.list input[type=text]:hover,table.list input[type=text]:focus{border-color:var(--line);background:var(--bg)}
+.upi{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{font-size:13px;padding:1px 8px;border:1px solid var(--line);white-space:nowrap}
+.tag.b{border-color:var(--blue);color:var(--blue)}
+.tag.c{border-color:var(--magenta);color:var(--magenta)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line)}
+.seg label{padding:8px 14px;cursor:pointer;font-weight:500}
+.seg input{position:absolute;opacity:0}
+.seg label:has(input:checked){background:var(--magenta);color:#fff}
+.seg label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:-2px}
+.btn{border:1px solid var(--line);background:var(--surface);padding:8px 14px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{padding:3px 10px;font-size:14px}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.plan{margin-top:14px;display:grid;gap:8px}
+.plan .p{display:grid;grid-template-columns:70px 1fr auto;gap:10px;align-items:center;border-left:4px solid var(--magenta);padding:8px 12px;background:var(--bg)}
+.plan .p b{color:var(--blue);font-size:20px;font-variant-numeric:tabular-nums}
+.plan .p input{width:100%;border:1px solid var(--line);background:var(--surface);padding:4px 8px}
+.plan .p small{display:block;color:var(--muted);font-size:13px}
+.plan .p .amt{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.plan .p .amt small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.plan .p .amt small.warn{color:var(--warn)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px}
+.field label{display:block;font-size:14px;color:var(--muted);margin-bottom:3px}
+.field input,.field select{width:100%;border:1px solid var(--line);background:var(--bg);padding:7px 10px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;max-width:90vw;z-index:10;display:none}
+.empty{color:var(--muted);padding:18px 4px}
+.preview{overflow-x:auto;background:#8d8896;padding:16px;display:grid;gap:16px;justify-items:center}
+[hidden]{display:none!important}
+
+/* ---------- invoice (always paper white) ---------- */
+.inv{width:190mm;max-width:100%;min-height:250mm;background:#fff;color:#222;font-family:var(--font);padding:9mm;border:1px solid #ddd;display:flex;flex-direction:column;--r:#c8175d}
+.inv .hd{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;align-items:end;border-bottom:3px solid var(--r);padding-bottom:6px}
+.inv .hd .l{color:var(--r);font-weight:600;font-size:12px;line-height:1.35}
+.inv .hd .l .own{color:#333;font-weight:500;margin-top:6px}
+.inv .hd .r{text-align:right}
+.inv .ti{display:inline-block;background:var(--r);color:#fff;font-size:11px;font-weight:600;padding:1px 10px;margin-bottom:4px}
+.inv .nm{font-family:var(--display);color:var(--r);font-size:34px;line-height:1}
+.inv .nm small{display:block;font-family:var(--font);font-size:14px;letter-spacing:.3em;color:var(--r);font-weight:500}
+.inv .em{font-size:11px;color:var(--r)}
+.inv .addr{background:#fbe6ef;color:var(--r);text-align:center;font-size:12px;font-weight:600;padding:3px;margin:6px 0 8px}
+.inv .to{display:grid;grid-template-columns:1.6fr 1fr;border:1.5px solid var(--r)}
+.inv .to>div{padding:6px 10px;font-size:14px}
+.inv .to>div+div{border-left:1.5px solid var(--r)}
+.inv .to .k{color:var(--r);font-size:12px}
+.inv .to .v{color:#1b2a78;font-weight:600;font-size:16px}
+.inv .to .kv{display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+.inv .to .kv+.kv{border-top:1px solid var(--r);margin-top:4px;padding-top:4px}
+.inv table.it{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px;flex:1}
+.inv table.it th{color:var(--r);font-weight:500;font-size:12px;border:1.5px solid var(--r);padding:4px}
+.inv table.it td{border-left:1.5px solid var(--r);border-right:1.5px solid var(--r);padding:3px 6px;vertical-align:top;color:#1b2a78}
+.inv table.it tr.fill td{height:100%}
+.inv table.it tr:last-child td{border-bottom:1.5px solid var(--r)}
+.inv td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.inv .ln{display:grid;grid-template-columns:78px 1fr auto;gap:6px;font-size:13.5px}
+.inv .ln span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.inv .ln.t{border-top:1px solid #9aa3c8;margin-top:4px;padding-top:2px;font-weight:600}
+.inv .ft{display:grid;grid-template-columns:1.4fr 1fr;border:1.5px solid var(--r);border-top:0}
+.inv .ft .g{padding:6px 10px;font-size:13px;color:#333;display:flex;flex-direction:column;justify-content:space-between}
+.inv .ft .g .pm{color:var(--r);font-weight:600;font-size:12px}
+.inv .ft table{border-collapse:collapse;width:100%;border-left:1.5px solid var(--r)}
+.inv .ft td{padding:5px 8px;font-size:13px;border-bottom:1px solid var(--r);color:var(--r)}
+.inv .ft td.n{color:#1b2a78;border-left:1px solid var(--r)}
+.inv .ft tr:last-child td{border-bottom:0;font-weight:700;font-size:15px}
+.inv .wd{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-top:10px;font-size:13px}
+.inv .wd .k{color:var(--r);font-weight:600}
+.inv .wd .v{color:#1b2a78;font-weight:600;border-bottom:1px dotted #999;padding-bottom:2px}
+.inv .sg{text-align:right;color:var(--r);font-weight:600;padding-top:28px}
+.inv .cx{color:var(--r);font-weight:700;font-size:18px;border:2px solid var(--r);padding:0 10px;display:inline-block;transform:rotate(-8deg)}
+
+#printArea{display:none}
+@media print{
+  @page{size:A4;margin:8mm}
+  body{background:#fff}
+  .wrap,.toast{display:none!important}
+  #printArea{display:block}
+  #printArea .inv{border:0;padding:0;width:auto;min-height:268mm;page-break-after:always;break-after:page}
+  #printArea .inv:last-child{page-break-after:auto;break-after:auto}
+}
+@media (max-width:560px){.counter b{font-size:30px}.plan .p{grid-template-columns:54px 1fr}.plan .p .amt{grid-column:2}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+body{background:#eee}.inv{margin:10px auto}@media print{body{background:#fff}.inv{margin:0;border:0;padding:0;width:auto;min-height:268mm;break-after:page}.inv:last-child{break-after:auto}.bar{display:none}}</style></head>
+<body style="display:block"><div class="bar" style="text-align:center;padding:10px"><button onclick="print()" style="padding:8px 18px;font-size:16px">Print</button></div>
+<div class="inv">
+  <div class="hd"><div class="l">Multicolour Offset Printing<div class="own">Vijay V. Patil<br>Mobile: 98225 40626</div></div>
+    <div class="r"><span class="ti">TAX INVOICE</span><div class="nm">Padmavati<small>PRINTERS</small></div><div class="em">padmavati24x7@gmail.com</div></div></div>
+  <div class="addr">Regd. Office : 15 th Lane, DattaChaya Apartment, JAYSINGPUR</div>
+  <div class="to"><div><span class="k">To,</span> <span class="v">Sale Bill</span>
+      </div>
+    <div><div class="kv"><span class="k">JW Invoice No.</span><span class="v" style="font-size:20px">253</span></div>
+      <div class="kv"><span class="k">Date</span><span class="v">06/09/2026</span></div></div></div>
+  <table class="it"><thead><tr><th style="width:52%">Particulars</th><th>HSN</th><th>Rate</th><th>Qty.</th><th>Amount</th></tr></thead>
+    <tbody><tr class="fill"><td><div style="font-weight:600;margin-bottom:4px">Printing of jobs</div><div class="ln"><span>01/09</span><span>Shridhar Offset</span><span>3,420.00</span></div><div class="ln"><span>01/09</span><span>Jamkhandi Muttu Kannur</span><span>1,300.00</span></div><div class="ln"><span>02/09</span><span>Sagar Jadhav</span><span>4,000.00</span></div><div class="ln"><span>02/09</span><span>Yogesh Shah</span><span>15,000.00</span></div><div class="ln"><span>02/09</span><span>ABHIJIT CHANDRAKANT BHANDARE</span><span>1,500.00</span></div><div class="ln"><span>03/09</span><span>Kop Ganesh Chougule Co P Creation</span><span>3,800.00</span></div><div class="ln"><span>03/09</span><span>anil shirke</span><span>2,800.00</span></div><div class="ln"><span>04/09</span><span>Dipak Patole</span><span>100.00</span></div><div class="ln"><span>04/09</span><span>Sapana Daphale</span><span>9,200.00</span></div><div class="ln"><span>05/09</span><span>Shashikant Nalkar</span><span>7,400.00</span></div><div class="ln"><span>05/09</span><span>Nitin Jagdale</span><span>1,300.00</span></div><div class="ln"><span>05/09</span><span>Rainbow Prints</span><span>2,800.00</span></div><div class="ln"><span>05/09</span><span>ARYAN GRAPHICS</span><span>5,000.00</span></div><div class="ln"><span>06/09</span><span>Sagar Jadhav</span><span>5,000.00</span></div><div class="ln"><span>06/09</span><span>MANDIRA SANJAY SHINDE</span><span>5,400.00</span></div><div class="ln"><span>06/09</span><span>SACHIN KUMAR VAREKAR</span><span>10,000.00</span></div><div class="ln t"><span></span><span>Total received</span><span>78,020.00</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px">Paid by SBI QR code (UPI) / PhonePe (UPI) / Google Pay (UPI)</div></td>
+      <td>4901102</td><td class="n">25.64</td><td class="n">2898</td><td class="n">74,304.72</td></tr></tbody></table>
+  <div class="ft"><div class="g"><span class="pm">Received by UPI</span><span>GST No.: <b>27BCFPP3915F1ZM</b></span></div>
+    <table><tr><td>CGST 2.5%</td><td class="n">1,857.62</td></tr><tr><td>SGST 2.5%</td><td class="n">1,857.62</td></tr>
+    <tr><td>Round off</td><td class="n">+0.04</td></tr>
+    <tr><td>TOTAL</td><td class="n">78,020.00</td></tr></table></div>
+  <div class="wd"><div><span class="k">Rs In Words: </span><span class="v">Rupees Seventy Eight Thousand Twenty Only</span></div><div class="sg">For Padmavati Printers</div></div>
+</div><div class="inv">
+  <div class="hd"><div class="l">Multicolour Offset Printing<div class="own">Vijay V. Patil<br>Mobile: 98225 40626</div></div>
+    <div class="r"><span class="ti">TAX INVOICE</span><div class="nm">Padmavati<small>PRINTERS</small></div><div class="em">padmavati24x7@gmail.com</div></div></div>
+  <div class="addr">Regd. Office : 15 th Lane, DattaChaya Apartment, JAYSINGPUR</div>
+  <div class="to"><div><span class="k">To,</span> <span class="v">Sale Bill</span>
+      </div>
+    <div><div class="kv"><span class="k">JW Invoice No.</span><span class="v" style="font-size:20px">254</span></div>
+      <div class="kv"><span class="k">Date</span><span class="v">13/09/2026</span></div></div></div>
+  <table class="it"><thead><tr><th style="width:52%">Particulars</th><th>HSN</th><th>Rate</th><th>Qty.</th><th>Amount</th></tr></thead>
+    <tbody><tr class="fill"><td><div style="font-weight:600;margin-bottom:4px">Printing of jobs</div><div class="ln"><span>07/09</span><span>Satyajit Padvale</span><span>9,800.00</span></div><div class="ln"><span>07/09</span><span>PRIYA COMPUTERS</span><span>5,000.00</span></div><div class="ln"><span>07/09</span><span>Jamkhandi Muttu Kannur</span><span>7,320.00</span></div><div class="ln"><span>08/09</span><span>Sambhaji Mande</span><span>2,500.00</span></div><div class="ln"><span>08/09</span><span>ARYAN GRAPHICS</span><span>4,250.00</span></div><div class="ln"><span>09/09</span><span>Sagar Jadhav</span><span>7,000.00</span></div><div class="ln"><span>09/09</span><span>Sandesh Printing Press</span><span>5,000.00</span></div><div class="ln"><span>09/09</span><span>Rajendra Karande</span><span>5,000.00</span></div><div class="ln"><span>09/09</span><span>Shridhar Offset</span><span>6,500.00</span></div><div class="ln"><span>10/09</span><span>anil shirke</span><span>2,800.00</span></div><div class="ln"><span>11/09</span><span>Sachin Jamdade</span><span>1,700.00</span></div><div class="ln"><span>11/09</span><span>Shashikant Nalkar</span><span>2,600.00</span></div><div class="ln"><span>11/09</span><span>Jamkhandi Muttu Kannur</span><span>5,400.00</span></div><div class="ln"><span>12/09</span><span>ROHIT ASHOK JADHAV</span><span>2,400.00</span></div><div class="ln"><span>12/09</span><span>PRASAD SHASHIKANT KU</span><span>2,000.00</span></div><div class="ln"><span>12/09</span><span>PRASAD SHASHIKANT KU</span><span>400.00</span></div><div class="ln"><span>13/09</span><span>Sambhaji Shinde</span><span>1,300.00</span></div><div class="ln"><span>13/09</span><span>Shashikant Nalkar</span><span>4,550.00</span></div><div class="ln"><span>13/09</span><span>Sagar Jadhav</span><span>2,000.00</span></div><div class="ln t"><span></span><span>Total received</span><span>77,520.00</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px">Paid by SBI QR code (UPI) / PhonePe (UPI) / Google Pay (UPI)</div></td>
+      <td>4901102</td><td class="n">26.73</td><td class="n">2762</td><td class="n">73,828.26</td></tr></tbody></table>
+  <div class="ft"><div class="g"><span class="pm">Received by UPI</span><span>GST No.: <b>27BCFPP3915F1ZM</b></span></div>
+    <table><tr><td>CGST 2.5%</td><td class="n">1,845.71</td></tr><tr><td>SGST 2.5%</td><td class="n">1,845.71</td></tr>
+    <tr><td>Round off</td><td class="n">+0.32</td></tr>
+    <tr><td>TOTAL</td><td class="n">77,520.00</td></tr></table></div>
+  <div class="wd"><div><span class="k">Rs In Words: </span><span class="v">Rupees Seventy Seven Thousand Five Hundred Twenty Only</span></div><div class="sg">For Padmavati Printers</div></div>
+</div><div class="inv">
+  <div class="hd"><div class="l">Multicolour Offset Printing<div class="own">Vijay V. Patil<br>Mobile: 98225 40626</div></div>
+    <div class="r"><span class="ti">TAX INVOICE</span><div class="nm">Padmavati<small>PRINTERS</small></div><div class="em">padmavati24x7@gmail.com</div></div></div>
+  <div class="addr">Regd. Office : 15 th Lane, DattaChaya Apartment, JAYSINGPUR</div>
+  <div class="to"><div><span class="k">To,</span> <span class="v">Sale Bill</span>
+      </div>
+    <div><div class="kv"><span class="k">JW Invoice No.</span><span class="v" style="font-size:20px">255</span></div>
+      <div class="kv"><span class="k">Date</span><span class="v">20/09/2026</span></div></div></div>
+  <table class="it"><thead><tr><th style="width:52%">Particulars</th><th>HSN</th><th>Rate</th><th>Qty.</th><th>Amount</th></tr></thead>
+    <tbody><tr class="fill"><td><div style="font-weight:600;margin-bottom:4px">Printing of jobs</div><div class="ln"><span>15/09</span><span>Tanvir Jamadar</span><span>2,500.00</span></div><div class="ln"><span>16/09</span><span>Ravi offset</span><span>1,300.00</span></div><div class="ln"><span>16/09</span><span>Uday Yande</span><span>700.00</span></div><div class="ln"><span>16/09</span><span>UDIT VIJAY PATIL</span><span>20,000.00</span></div><div class="ln"><span>17/09</span><span>Umesh Mangave</span><span>2,600.00</span></div><div class="ln"><span>17/09</span><span>Ajim Naik</span><span>2,900.00</span></div><div class="ln"><span>17/09</span><span>udhav Karande</span><span>6,410.00</span></div><div class="ln"><span>17/09</span><span>Sagar Jadhav</span><span>1,300.00</span></div><div class="ln"><span>17/09</span><span>PRIYA COMPUTERS</span><span>4,500.00</span></div><div class="ln"><span>17/09</span><span>UDIT VIJAY PATIL</span><span>10,000.00</span></div><div class="ln"><span>18/09</span><span>anil shirke</span><span>4,480.00</span></div><div class="ln"><span>20/09</span><span>anil shirke</span><span>1,400.00</span></div><div class="ln t"><span></span><span>Total received</span><span>58,090.00</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px">Paid by PhonePe (UPI) / SBI QR code (UPI) / Google Pay (UPI)</div></td>
+      <td>4901102</td><td class="n">25.78</td><td class="n">2146</td><td class="n">55,323.88</td></tr></tbody></table>
+  <div class="ft"><div class="g"><span class="pm">Received by UPI</span><span>GST No.: <b>27BCFPP3915F1ZM</b></span></div>
+    <table><tr><td>CGST 2.5%</td><td class="n">1,383.10</td></tr><tr><td>SGST 2.5%</td><td class="n">1,383.10</td></tr>
+    <tr><td>Round off</td><td class="n">−0.08</td></tr>
+    <tr><td>TOTAL</td><td class="n">58,090.00</td></tr></table></div>
+  <div class="wd"><div><span class="k">Rs In Words: </span><span class="v">Rupees Fifty Eight Thousand Ninety Only</span></div><div class="sg">For Padmavati Printers</div></div>
+</div><div class="inv">
+  <div class="hd"><div class="l">Multicolour Offset Printing<div class="own">Vijay V. Patil<br>Mobile: 98225 40626</div></div>
+    <div class="r"><span class="ti">TAX INVOICE</span><div class="nm">Padmavati<small>PRINTERS</small></div><div class="em">padmavati24x7@gmail.com</div></div></div>
+  <div class="addr">Regd. Office : 15 th Lane, DattaChaya Apartment, JAYSINGPUR</div>
+  <div class="to"><div><span class="k">To,</span> <span class="v">Sale Bill</span>
+      </div>
+    <div><div class="kv"><span class="k">JW Invoice No.</span><span class="v" style="font-size:20px">256</span></div>
+      <div class="kv"><span class="k">Date</span><span class="v">24/09/2026</span></div></div></div>
+  <table class="it"><thead><tr><th style="width:52%">Particulars</th><th>HSN</th><th>Rate</th><th>Qty.</th><th>Amount</th></tr></thead>
+    <tbody><tr class="fill"><td><div style="font-weight:600;margin-bottom:4px">Printing of jobs</div><div class="ln"><span>23/09</span><span>RAJU NABILAL ATTAR</span><span>1,000.00</span></div><div class="ln"><span>24/09</span><span>WAGHCHAUDE AMOL EKNATH</span><span>7,800.00</span></div><div class="ln t"><span></span><span>Total received</span><span>8,800.00</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px">Paid by PhonePe (UPI) / Google Pay (UPI)</div></td>
+      <td>4901102</td><td class="n">26.19</td><td class="n">320</td><td class="n">8,380.80</td></tr></tbody></table>
+  <div class="ft"><div class="g"><span class="pm">Received by UPI</span><span>GST No.: <b>27BCFPP3915F1ZM</b></span></div>
+    <table><tr><td>CGST 2.5%</td><td class="n">209.52</td></tr><tr><td>SGST 2.5%</td><td class="n">209.52</td></tr>
+    <tr><td>Round off</td><td class="n">+0.16</td></tr>
+    <tr><td>TOTAL</td><td class="n">8,800.00</td></tr></table></div>
+  <div class="wd"><div><span class="k">Rs In Words: </span><span class="v">Rupees Eight Thousand Eight Hundred Only</span></div><div class="sg">For Padmavati Printers</div></div>
+</div><div class="inv">
+  <div class="hd"><div class="l">Multicolour Offset Printing<div class="own">Vijay V. Patil<br>Mobile: 98225 40626</div></div>
+    <div class="r"><span class="ti">TAX INVOICE</span><div class="nm">Padmavati<small>PRINTERS</small></div><div class="em">padmavati24x7@gmail.com</div></div></div>
+  <div class="addr">Regd. Office : 15 th Lane, DattaChaya Apartment, JAYSINGPUR</div>
+  <div class="to"><div><span class="k">To,</span> <span class="v">Sale Bill</span>
+      </div>
+    <div><div class="kv"><span class="k">JW Invoice No.</span><span class="v" style="font-size:20px">257</span></div>
+      <div class="kv"><span class="k">Date</span><span class="v">29/09/2026</span></div></div></div>
+  <table class="it"><thead><tr><th style="width:52%">Particulars</th><th>HSN</th><th>Rate</th><th>Qty.</th><th>Amount</th></tr></thead>
+    <tbody><tr class="fill"><td><div style="font-weight:600;margin-bottom:4px">Printing of jobs</div><div class="ln"><span>28/09</span><span>SHIVRAM BABANRAO PAWAR</span><span>5,000.00</span></div><div class="ln"><span>28/09</span><span>Sachin Salve</span><span>3,300.00</span></div><div class="ln"><span>29/09</span><span>BABASAHEB MAHADEV NAVAGEKAR</span><span>2,650.00</span></div><div class="ln t"><span></span><span>Total received</span><span>10,950.00</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px">Paid by PhonePe (UPI)</div></td>
+      <td>4901102</td><td class="n">26.74</td><td class="n">390</td><td class="n">10,428.60</td></tr></tbody></table>
+  <div class="ft"><div class="g"><span class="pm">Received by UPI</span><span>GST No.: <b>27BCFPP3915F1ZM</b></span></div>
+    <table><tr><td>CGST 2.5%</td><td class="n">260.72</td></tr><tr><td>SGST 2.5%</td><td class="n">260.72</td></tr>
+    <tr><td>Round off</td><td class="n">−0.04</td></tr>
+    <tr><td>TOTAL</td><td class="n">10,950.00</td></tr></table></div>
+  <div class="wd"><div><span class="k">Rs In Words: </span><span class="v">Rupees Ten Thousand Nine Hundred Fifty Only</span></div><div class="sg">For Padmavati Printers</div></div>
+</div></body></html>
